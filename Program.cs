@@ -1,14 +1,16 @@
 using CommanderGQL.Data;
+using CommanderGQL.GraphQL;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddPooledDbContextFactory<ApplicationDbContext>
+builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlite("Data Source=commander.db"));
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 
 var app = builder.Build();
 
