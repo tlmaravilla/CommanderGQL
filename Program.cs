@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlite("Data Source=commander.db"));
 
+builder.Services.AddPooledDbContextFactory<ApplicationDbContext>
+    (options => options.UseSqlite("Data Source=commander.db"));
+
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
